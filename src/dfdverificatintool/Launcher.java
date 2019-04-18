@@ -5,17 +5,27 @@
  */
 package dfdverificatintool;
 
+import java.util.ArrayList;
+import java.util.Vector;
+import javafx.util.Pair;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Dell-1
  */
 public class Launcher extends javax.swing.JFrame {
+    
+    public int levelSelected,noOfProcess,noOfStorage,noOfEntity;
+    public Vector<String> errors = new Vector();
+    public ArrayList <Pair <String,String> > dataFlow;
 
     /**
      * Creates new form Launcher
      */
     public Launcher() {
         initComponents();
+    
     }
 
     /**
@@ -29,22 +39,22 @@ public class Launcher extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        noOfStorages = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jComboBox5 = new javax.swing.JComboBox<>();
-        jComboBox6 = new javax.swing.JComboBox<>();
+        dfdLevel = new javax.swing.JComboBox<>();
+        noOfEntities = new javax.swing.JComboBox<>();
+        noOfProcesses = new javax.swing.JComboBox<>();
+        btnverify = new javax.swing.JButton();
+        toEntity = new javax.swing.JComboBox<>();
+        fromEntity = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jButton2 = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
+        display = new javax.swing.JTextArea();
+        btnAddDataFlow = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -58,13 +68,13 @@ public class Launcher extends javax.swing.JFrame {
         jLabel2.setText("Number of Storage");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 140, 130, 30));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        noOfStorages.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        noOfStorages.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                noOfStoragesActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 140, -1, 30));
+        getContentPane().add(noOfStorages, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 140, 50, 30));
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Level of DFD");
@@ -78,94 +88,138 @@ public class Launcher extends javax.swing.JFrame {
         jLabel6.setText("Number of Processes");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 90, 170, 30));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        dfdLevel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2" }));
+        dfdLevel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                dfdLevelActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, -1, 30));
+        getContentPane().add(dfdLevel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, 50, 30));
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+        noOfEntities.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        noOfEntities.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox3ActionPerformed(evt);
+                noOfEntitiesActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, -1, 30));
+        getContentPane().add(noOfEntities, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 50, 30));
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
+        noOfProcesses.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5" }));
+        noOfProcesses.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox4ActionPerformed(evt);
+                noOfProcessesActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 90, -1, 30));
+        getContentPane().add(noOfProcesses, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 90, 50, 30));
 
-        jButton1.setText("Verify My DFD");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnverify.setText("Verify My DFD");
+        btnverify.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnverifyActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 460, 700, 40));
+        getContentPane().add(btnverify, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 720, 40));
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 390, 230, 30));
+        getContentPane().add(toEntity, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, 230, 30));
 
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(jComboBox6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, 230, 30));
+        getContentPane().add(fromEntity, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 230, 30));
 
         jLabel3.setText("To");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 370, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, -1, -1));
 
         jLabel7.setText("From");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, -1, -1));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        display.setColumns(20);
+        display.setRows(5);
+        jScrollPane1.setViewportView(display);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 280, 290, 150));
 
-        jButton2.setText("Start Adding Data Flow");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnAddDataFlow.setText("Start Adding Data Flow");
+        btnAddDataFlow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnAddDataFlowActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 203, 700, 40));
+        getContentPane().add(btnAddDataFlow, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 203, 720, 40));
 
-        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\Dell-1\\Pictures\\cube.jpg")); // NOI18N
-        jLabel8.setText("jLabel8");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, 4, 770, 520));
+        btnAdd.setText("ADD");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 410, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void noOfStoragesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noOfStoragesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_noOfStoragesActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void dfdLevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dfdLevelActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_dfdLevelActionPerformed
 
-    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+    private void noOfEntitiesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noOfEntitiesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox3ActionPerformed
+    }//GEN-LAST:event_noOfEntitiesActionPerformed
 
-    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
+    private void noOfProcessesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noOfProcessesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox4ActionPerformed
+    }//GEN-LAST:event_noOfProcessesActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnverifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnverifyActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        String displayData = display.getText();
+        if(displayData.isEmpty())
+        {
+            JOptionPane.showMessageDialog(null,"Please Enter Data Flows");
+        }
+    }//GEN-LAST:event_btnverifyActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnAddDataFlowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddDataFlowActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        levelSelected = Integer.parseInt(dfdLevel.getSelectedItem().toString());
+        noOfEntity = Integer.parseInt(noOfEntities.getSelectedItem().toString());
+        noOfProcess = Integer.parseInt(noOfProcesses.getSelectedItem().toString());
+        noOfStorage = Integer.parseInt(noOfStorages.getSelectedItem().toString());
+        
+        if(levelSelected==0 && noOfStorage!=0)
+            errors.add("Level 0 DFD can't have any storage");
+        
+        String process = "Process ";
+        String entity = "Entity ";
+        String storage = "Storage ";
+        for(int i=0;i<noOfProcess;i++)
+        {
+            fromEntity.addItem(process+i);
+            toEntity.addItem(process+i);
+        }
+        for(int i=0;i<noOfEntity;i++)
+        {
+            fromEntity.addItem(entity+i);
+            toEntity.addItem(entity+i);
+        }
+        for(int i=0;i<noOfStorage;i++)
+        {
+            fromEntity.addItem(storage+i);
+            toEntity.addItem(storage+i);
+        }
+    }//GEN-LAST:event_btnAddDataFlowActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        
+        String from = fromEntity.getSelectedItem().toString();
+        String to = toEntity.getSelectedItem().toString();
+        
+        dataFlow = new ArrayList <Pair <String,String> > (); 
+        dataFlow.add(new Pair<String,String>(from,to));
+        display.setText(display.getText() + "\n"+ from + " --> " + to);
+        
+    }//GEN-LAST:event_btnAddActionPerformed
 
     /**
      * @param args the command line arguments
@@ -203,14 +257,12 @@ public class Launcher extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox5;
-    private javax.swing.JComboBox<String> jComboBox6;
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnAddDataFlow;
+    private javax.swing.JButton btnverify;
+    private javax.swing.JComboBox<String> dfdLevel;
+    private javax.swing.JTextArea display;
+    private javax.swing.JComboBox<String> fromEntity;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -218,8 +270,10 @@ public class Launcher extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JComboBox<String> noOfEntities;
+    private javax.swing.JComboBox<String> noOfProcesses;
+    private javax.swing.JComboBox<String> noOfStorages;
+    private javax.swing.JComboBox<String> toEntity;
     // End of variables declaration//GEN-END:variables
 }
