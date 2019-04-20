@@ -5,9 +5,10 @@
  */
 package dfdverificatintool;
 
+import com.sun.tools.javac.util.Pair;
+import java.awt.List;
 import java.util.ArrayList;
 import java.util.Vector;
-import javafx.util.Pair;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,7 +19,7 @@ public class Launcher extends javax.swing.JFrame {
     
     public int levelSelected,noOfProcess,noOfStorage,noOfEntity;
     public Vector<String> errors = new Vector();
-    public ArrayList <Pair <String,String> > dataFlow;
+    public ArrayList<Pair<String,String>> dataFlow = new ArrayList<>();
 
     /**
      * Creates new form Launcher
@@ -55,6 +56,7 @@ public class Launcher extends javax.swing.JFrame {
         display = new javax.swing.JTextArea();
         btnAddDataFlow = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -62,11 +64,11 @@ public class Launcher extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Gungsuh", 1, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("DFD Verification Tool");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 730, 50));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 730, 50));
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Number of Storage");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 140, 130, 30));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 150, 130, 30));
 
         noOfStorages.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
         noOfStorages.addActionListener(new java.awt.event.ActionListener() {
@@ -74,19 +76,19 @@ public class Launcher extends javax.swing.JFrame {
                 noOfStoragesActionPerformed(evt);
             }
         });
-        getContentPane().add(noOfStorages, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 140, 50, 30));
+        getContentPane().add(noOfStorages, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 150, 50, 30));
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Level of DFD");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 180, 30));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 180, 30));
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Number of Entities");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 130, 30));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 130, 30));
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Number of Processes");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 90, 170, 30));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 100, 170, 30));
 
         dfdLevel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2" }));
         dfdLevel.addActionListener(new java.awt.event.ActionListener() {
@@ -94,7 +96,7 @@ public class Launcher extends javax.swing.JFrame {
                 dfdLevelActionPerformed(evt);
             }
         });
-        getContentPane().add(dfdLevel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, 50, 30));
+        getContentPane().add(dfdLevel, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, 50, 30));
 
         noOfEntities.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
         noOfEntities.addActionListener(new java.awt.event.ActionListener() {
@@ -102,7 +104,7 @@ public class Launcher extends javax.swing.JFrame {
                 noOfEntitiesActionPerformed(evt);
             }
         });
-        getContentPane().add(noOfEntities, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 50, 30));
+        getContentPane().add(noOfEntities, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 150, 50, 30));
 
         noOfProcesses.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5" }));
         noOfProcesses.addActionListener(new java.awt.event.ActionListener() {
@@ -110,7 +112,7 @@ public class Launcher extends javax.swing.JFrame {
                 noOfProcessesActionPerformed(evt);
             }
         });
-        getContentPane().add(noOfProcesses, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 90, 50, 30));
+        getContentPane().add(noOfProcesses, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 100, 50, 30));
 
         btnverify.setText("Verify My DFD");
         btnverify.addActionListener(new java.awt.event.ActionListener() {
@@ -118,11 +120,11 @@ public class Launcher extends javax.swing.JFrame {
                 btnverifyActionPerformed(evt);
             }
         });
-        getContentPane().add(btnverify, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 720, 40));
+        getContentPane().add(btnverify, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 850, 40));
 
-        getContentPane().add(toEntity, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, 230, 30));
+        getContentPane().add(toEntity, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 250, 30));
 
-        getContentPane().add(fromEntity, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 230, 30));
+        getContentPane().add(fromEntity, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 250, 30));
 
         jLabel3.setText("To");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, -1, -1));
@@ -134,7 +136,7 @@ public class Launcher extends javax.swing.JFrame {
         display.setRows(5);
         jScrollPane1.setViewportView(display);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 280, 290, 150));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 280, 440, 150));
 
         btnAddDataFlow.setText("Start Adding Data Flow");
         btnAddDataFlow.addActionListener(new java.awt.event.ActionListener() {
@@ -142,7 +144,7 @@ public class Launcher extends javax.swing.JFrame {
                 btnAddDataFlowActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAddDataFlow, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 203, 720, 40));
+        getContentPane().add(btnAddDataFlow, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 203, 860, 40));
 
         btnAdd.setText("ADD");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -151,6 +153,9 @@ public class Launcher extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 410, -1, -1));
+
+        jPanel1.setBackground(new java.awt.Color(231, 127, 24));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 880, 640));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -178,6 +183,70 @@ public class Launcher extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(null,"Please Enter Data Flows");
         }
+        else
+        {
+             int left,right;
+            for(int i = 0;i<noOfProcess;i++)
+            {
+               left = right = 0;
+               for(int j = 0;j<dataFlow.size();j++)
+               {
+                   String first = dataFlow.get(j).fst;
+                   String second = dataFlow.get(j).snd;
+                   if(first.equals("Process " +i))
+                       left = 1;
+                   if(second.equals("Process "+i))
+                       right=1;
+               }
+               if(left==0 || right==0)
+                   errors.add("Process "+i+"  should have atleast one input and one output.");
+            }
+            for(int i = 0;i<noOfStorage;i++)
+            {
+               left = right = 0;
+               for(int j = 0;j<dataFlow.size();j++)
+               {
+                   String first = dataFlow.get(j).fst;
+                   String second = dataFlow.get(j).snd;
+                   if(first.equals("Storage " +i))
+                       left = 1;
+                   if(second.equals("Storage "+i))
+                       right=1;
+               }
+               if(left==0 || right==0)
+                   errors.add("Storage "+i+"  should have atleast one input and one output.");
+            }
+            int flag=0;
+               for(int j = 0;j<dataFlow.size();j++)
+               {
+                   char first = dataFlow.get(j).fst.charAt(0);
+                   char second = dataFlow.get(j).snd.charAt(0);
+                   if(first=='S' && second=='S')
+                       errors.add("Two Storages "+"( "+dataFlow.get(j).fst+" --> "+dataFlow.get(j).snd+" )"+ " cannot have direct dataflow ");
+                    if(first=='E' && second=='E')
+                       errors.add("Two Entities "+"( "+dataFlow.get(j).fst+" --> "+dataFlow.get(j).snd+" )"+ " cannot have direct dataflow ");
+                    if(first=='E' && second=='S')
+                       errors.add("An Entity and a Storage "+"( "+dataFlow.get(j).fst+" --> "+dataFlow.get(j).snd+" )"+ " cannot have direct dataflow ");
+                    if(first=='S' && second=='E')
+                       errors.add("An Entity and a Storage "+"( "+dataFlow.get(j).fst+" --> "+dataFlow.get(j).snd+" )"+ " cannot have direct dataflow ");
+                    if(dataFlow.get(j).fst.equals(dataFlow.get(j).snd))
+                        errors.add("DFD should not have seif loop ( "+dataFlow.get(j).fst+" --> "+dataFlow.get(j).snd+" )");
+               }
+            
+               for(int i=0;i<dataFlow.size()-1;i++)
+               {
+                   for(int j=i+1;j<dataFlow.size();j++)
+                   {
+                       if((dataFlow.get(i).fst.equals(dataFlow.get(j).fst)) && (dataFlow.get(i).snd.equals(dataFlow.get(j).snd)))
+                           errors.add("DFD should not have multiple edges ( "+dataFlow.get(j).fst+" --> "+dataFlow.get(j).snd+" )");
+                   }
+               }
+            
+            for(int i =0;i<errors.size();i++)
+            {
+                System.out.println(errors.get(i));
+            }
+        }
     }//GEN-LAST:event_btnverifyActionPerformed
 
     private void btnAddDataFlowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddDataFlowActionPerformed
@@ -189,6 +258,10 @@ public class Launcher extends javax.swing.JFrame {
         
         if(levelSelected==0 && noOfStorage!=0)
             errors.add("Level 0 DFD can't have any storage");
+        if(noOfEntity==0 || noOfProcess==0)
+            errors.add("DFD should contain atleast one process and one entity");
+        if(levelSelected==0  &&  noOfProcess>1)
+            errors.add("Level 0 DFD should not contain more than one process");
         
         String process = "Process ";
         String entity = "Entity ";
@@ -214,11 +287,9 @@ public class Launcher extends javax.swing.JFrame {
         
         String from = fromEntity.getSelectedItem().toString();
         String to = toEntity.getSelectedItem().toString();
-        
-        dataFlow = new ArrayList <Pair <String,String> > (); 
-        dataFlow.add(new Pair<String,String>(from,to));
-        display.setText(display.getText() + "\n"+ from + " --> " + to);
-        
+          display.setText(display.getText() + "\n"+ from + "  -->  " + to);
+      dataFlow.add(new Pair<String,String>(from,to));
+      
     }//GEN-LAST:event_btnAddActionPerformed
 
     /**
@@ -270,6 +341,7 @@ public class Launcher extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> noOfEntities;
     private javax.swing.JComboBox<String> noOfProcesses;
