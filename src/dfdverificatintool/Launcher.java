@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 public class Launcher extends javax.swing.JFrame {
     
     public int levelSelected,noOfProcess,noOfStorage,noOfEntity;
-    public Vector<String> errors = new Vector();
+    public static Vector<String> errors = new Vector();
     public ArrayList<Pair<String,String>> dataFlow = new ArrayList<>();
 
     /**
@@ -154,8 +154,8 @@ public class Launcher extends javax.swing.JFrame {
         });
         getContentPane().add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 410, -1, -1));
 
-        jPanel1.setBackground(new java.awt.Color(231, 127, 24));
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 880, 640));
+        jPanel1.setBackground(new java.awt.Color(196, 188, 100));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1060, 650));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -242,10 +242,12 @@ public class Launcher extends javax.swing.JFrame {
                    }
                }
             
-            for(int i =0;i<errors.size();i++)
-            {
-                System.out.println(errors.get(i));
-            }
+//            for(int i =0;i<errors.size();i++)
+//            {
+//                System.out.println(errors.get(i));
+//            }
+
+            new Output().setVisible(true);
         }
     }//GEN-LAST:event_btnverifyActionPerformed
 
